@@ -38,4 +38,5 @@ fi
      "${APT}" install -y \
      automake make gcc-core gcc-g++ libgccjit0 patch bzip2 perl tar xz \
      coreutils curl cygutils git ncurses unzip wget \
+     libjansson-devel libjansson-doc libjansson4 \
     | sed 's|^|[apt-get] |g'
