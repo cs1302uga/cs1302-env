@@ -60,4 +60,6 @@ cat <<-EOF
 
 EOF
 
+echo COLUMNS=${COLUMNS}
+
 fetch_and_run_installer "${CS1302_ENV_OS}"
