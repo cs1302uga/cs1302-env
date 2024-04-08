@@ -40,4 +40,5 @@ fi
      automake make gcc-core gcc-g++ libgccjit0 patch perl \
      libjansson-devel libjansson-doc libjansson4 \
      zlib zlib0 zlib-devl zip unzip tar xz bzip2 \
+     emacs \
     | sed 's|^|[apt-get] |g'
