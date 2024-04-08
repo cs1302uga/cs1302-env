@@ -35,7 +35,7 @@ fetch_and_run_installer() {
     local INSTALLER="install-${OS}.sh"
     local URL="https://raw.githubusercontent.com/cs1302uga/cs1302-env/main/${INSTALLER}"
     if curl -fsSL -I ${URL} >/dev/null 2>&1; then
-	/bin/bash -c "$(curl -fsSL "${URL}")"
+	"$(curl -fsSL "${URL}")"
     else
 	echo "Error: Unable to continue. Unable to fetch the installer for" \
 	     "the '${OS}' operating system." \
