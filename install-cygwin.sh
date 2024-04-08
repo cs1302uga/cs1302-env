@@ -35,5 +35,6 @@ fi
 
 tput cols
 
-2>&1 "${APT}" install -y coreutils curl cygutils git ncurses unzip wget \
+2>&1 COLUMNS="$((${COLUMNS}-10))" \
+     "${APT}" install -y coreutils curl cygutils git ncurses unzip wget \
     | sed 's|^|[apt-get] |g'
