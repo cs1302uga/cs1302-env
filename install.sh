@@ -30,12 +30,32 @@ case "${CS1302_ENV_OSTYPE}" in
 	;;
 esac
 
+fetch_and_run_installer() {
+    local OS="${1}"
+    local INSTALLER="install-${OS}.sh"
+    local URL="https://raw.githubusercontent.com/cs1302uga/cs1302-env/main/${INSTALLER}"
+    if curl -fsSL -I ${URL} &>/dev/null; then
+	/bin/bash -c "$(curl -fsSL "${INSTALLER}" "${URL}")"
+    else
+	echo "Error: Unable to continue. Unable to fetch the installer for" \
+	     "the '${OS}' operating system." \
+	     1>&2
+	exit 1
+    fi
+} # fetch_and_run_installer
+
 for VAR in "${!CS1302_ENV_@}"; do
     if [[ ! -z "${!VAR:-}" ]]; then
 	echo "${VAR}=${!VAR}"
     fi
 done
 
-cs1302_env_url() {
-    printf 'https://raw.githubusercontent.com/cs1302uga/cs1302-env/main/%s\n' "${1}"
-} # cs1302_env_url
+cat <<-EOF
+         _______ ___  ___
+ _______<  /_  // _ \|_  |
+/ __(_-</ //_ </ // / __/
+\__/___/_/____/\___/____/
+
+EOF
+
+fetch_and_run_installer "${CS1302_ENV_OS}"
