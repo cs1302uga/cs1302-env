@@ -30,6 +30,6 @@ esac
 echo "Running the 'cygwin' installer..."
 
 2>&1 \
-    COLUMNS="$(($COLUMNS-10))" \
+    COLUMNS="$(($(tput cols)-10))" \
     apt-cyg install -y curl git unzip wget \
     | sed 's|^|[apt-cyg] |g'
