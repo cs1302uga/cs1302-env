@@ -33,5 +33,7 @@ if type -P MobApt >/dev/null 2>&1; then
     declare -r APT="$(type -P MobApt)"
 fi
 
+tput cols
+
 2>&1 "${APT}" install -y coreutils curl cygutils git ncurses unzip wget \
     | sed 's|^|[apt-get] |g'
