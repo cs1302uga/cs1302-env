@@ -34,5 +34,7 @@ if type -P MobApt >/dev/null 2>&1; then
 fi
 
 2>&1 COLUMNS="$((${COLUMNS}-10))" \
-     "${APT}" install -y coreutils curl cygutils git ncurses unzip wget \
+     "${APT}" install -y \
+     automake make gcc-core gcc-g++ libgccjit0 patch bzip2 perl tar xz \
+     coreutils curl cygutils git ncurses unzip wget \
     | sed 's|^|[apt-get] |g'
