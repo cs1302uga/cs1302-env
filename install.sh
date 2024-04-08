@@ -12,6 +12,8 @@ fi
 
 set +o posix # turn off POSIX mode
 
+shopt -s checkwinsize
+
 #------------------------------------------------------------------------------#
 
 declare -r CS1302_ENV_OSTYPE="$(uname -s | tr '[A-Z]' '[a-z]')"
