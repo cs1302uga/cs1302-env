@@ -36,7 +36,7 @@ fi
 
 2>&1 COLUMNS="$((${COLUMNS}-10))" \
      "${APT}" install -y \
-     automake make gcc-core gcc-g++ libgccjit0 patch bzip2 perl tar xz \
+     automake make gcc-core gcc-g++ libgccjit0 patch bzip2 perl tar xz zlib \
      coreutils curl cygutils git ncurses unzip wget \
      libjansson-devel libjansson-doc libjansson4 \
     | sed 's|^|[apt-get] |g'
