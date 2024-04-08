@@ -28,6 +28,7 @@ case "${CS1302_ENV_OSTYPE}" in
 esac
 
 echo "Running the 'cygwin' installer..."
+echo ""
 
 if type -P MobApt >/dev/null 2>&1; then
     declare -r APT="$(type -P MobApt)"
