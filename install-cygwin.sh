@@ -29,5 +29,9 @@ esac
 
 echo "Running the 'cygwin' installer..."
 
-2>&1 apt-cyg install -y curl git unzip wget \
+if type -P MobApt >/dev/null 2>&1; then
+    declare -r APT="$(type -P MobApt)"
+fi
+
+2>&1 "${APT}" install -y coreutils curl cygutils git unzip wget \
     | sed 's|^|[apt-cyg] |g'
