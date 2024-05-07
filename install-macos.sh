@@ -75,19 +75,19 @@ function mvn_url() {
 function jdk_install() {
     echo "Installing JDK to ${CS1302_ENV_JDK_HOME} ..."
     mkdir -p "${CS1302_ENV_JDK_HOME}"
-    pushd "${CS1302_ENV_HOME}"
+    pushd "${CS1302_ENV_HOME}" &> /dev/null
     curl --progress-bar -o "jdk.tar.gz" "$(jdk_url)"
     tar -z -x --strip-components 4 --cd "${CS1302_ENV_JDK_HOME}" -f "jdk.tar.gz"
-    popd
+    popd &> /dev/null
 } # jdk_install
 
 function mvn_install() {
     echo "Installing MVN to ${CS1302_ENV_MVN_HOME} ..."
     mkdir -p "${CS1302_ENV_MVN_HOME}"
-    pushd "${CS1302_ENV_HOME}"
+    pushd "${CS1302_ENV_HOME}" &> /dev/null
     curl --progress-bar -o "mvn.tar.gz" "$(mvn_url)"
     tar -z -x --strip-components 1 --cd "${CS1302_ENV_MVN_HOME}" -f "mvn.tar.gz"
-    popd
+    popd &> /dev/null
 } # mvn_install
 
 jdk_install
