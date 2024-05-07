@@ -31,7 +31,7 @@ echo "Running the 'macos' installer..."
 echo ""
 
 declare -r CS1302_ENV_MACHINE="$(uname -m | tr '[A-Z]' '[a-z]')"
-case "${CS1302_ENV_OSTYPE}" in
+case "${CS1302_ENV_MACHINE}" in
     arm64)
 	declare -r CS1302_ENV_JDK="macos-aarch64"
 	;;
