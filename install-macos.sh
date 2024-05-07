@@ -51,7 +51,7 @@ function jdk_url() {
     local VERSION="${1:-17.0.10}"
     local VERSION_MAJOR="$(echo "${VERSION}"| cut -d. -f1)"
     local ARCHIVE="jdk-${VERSION}_${CS1302_ENV_JDK}_bin.tar.gz"
-    printf 'https://download.oracle.com/java/%s/archive/%s\n'
+    printf 'https://download.oracle.com/java/%s/archive/%s\n' \
 	   "${VERSION_MAJOR}" \
 	   "${ARCHIVE}"
 } # jdk_url
