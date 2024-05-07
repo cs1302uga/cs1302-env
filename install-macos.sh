@@ -102,7 +102,7 @@ export MAVEN_HOME="${CS1302_ENV_MVN_HOME}"
 export PATH="${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${PATH}"
 export PS1="[env1302] ${PS1:-\\[\\h:\\W \\u \\$ }"
 
-${SHELL} --noprofile
+/bin/bash --noprofile
 EOF
     chmod +x ./env1302
     popd &> /dev/null
