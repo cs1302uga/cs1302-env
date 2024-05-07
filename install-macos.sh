@@ -73,18 +73,27 @@ function mvn_url() {
 } # mvn_url
 
 function jdk_install() {
-    (
-	set -x
-	mkdir -p "${CS1302_ENV_JDK_HOME}"
-	pushd "${CS1302_ENV_HOME}"
-	curl --progress-bar -o "jdk.tar.gz" "$(jdk_url)"
-	tar -z -x --strip-components 4 --cd "${CS1302_ENV_JDK_HOME}" -f "jdk.tar.gz"
-	popd
-    )
+    echo "Installing JDK to ${CS1302_ENV_JDK_HOME} ..."
+    mkdir -p "${CS1302_ENV_JDK_HOME}"
+    pushd "${CS1302_ENV_HOME}"
+    curl --progress-bar -o "jdk.tar.gz" "$(jdk_url)"
+    tar -z -x --strip-components 4 --cd "${CS1302_ENV_JDK_HOME}" -f "jdk.tar.gz"
+    popd
 } # jdk_install
 
-echo "Installing JDK..."
-jdk_install
+function mvn_install() {
+    echo "Installing MVN to ${CS1302_ENV_MVN_HOME} ..."
+    mkdir -p "${CS1302_ENV_MVN_HOME}"
+    pushd "${CS1302_ENV_HOME}"
+    curl --progress-bar -o "mvn.tar.gz" "$(mvn_url)"
+    tar -z -x --strip-components 1 --cd "${CS1302_ENV_MVN_HOME}" -f "mvn.tar.gz"
+    popd
+} # mvn_install
 
-echo "Installing MVN..."
-echo "$(mvn_url)"
+jdk_install
+mvn_install
+
+echo "Run the following command to add the JDK and MVN to your PATH:"
+echo ""
+echo "    export PATH=\"${CS1302_ENV_MVN_HOME}/bin:${CS1302_ENV_JDK_HOME}/bin:\$PATH\""
+echo ""
