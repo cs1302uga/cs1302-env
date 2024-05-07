@@ -16,7 +16,7 @@ set +o posix # turn off POSIX mode
 
 declare -r CS1302_ENV_OSTYPE="$(uname -s | tr '[A-Z]' '[a-z]')"
 case "${CS1302_ENV_OSTYPE}" in
-    macos*)
+    darwin*)
 	declare -r CS1302_ENV_OS="macos"
 	;;
     *)
