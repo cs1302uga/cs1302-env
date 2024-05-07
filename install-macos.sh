@@ -57,7 +57,7 @@ function jdk_url() {
 } # jdk_url
 
 function mvn_url() {
-    local VERSION=""
+    local VERSION="${1:-3.9.6}"
     local VERSION_MAJOR="$(echo "${VERSION}"| cut -d. -f1)"
     local ARCHIVE="apache-maven-${VERSION}-bin.tar.gz"
     printf 'https://dlcdn.apache.org/maven/maven-%s/%s/binaries/%s' \
