@@ -57,7 +57,7 @@ declare -r CS1302_ENV_MVN_HOME="${CS1302_ENV_HOME}/mvn"
 
 function jdk_url() {
     local VERSION_MAJOR="$(echo "${CS1302_ENV_JDK_VERSION}"| cut -d. -f1)"
-    local ARCHIVE="jdk-${VERSION}_${CS1302_ENV_JDK}_bin.tar.gz"
+    local ARCHIVE="jdk-${CS1302_ENV_JDK_VERSION}_${CS1302_ENV_JDK}_bin.tar.gz"
     printf 'https://download.oracle.com/java/%s/archive/%s\n' \
 	   "${VERSION_MAJOR}" \
 	   "${ARCHIVE}"
@@ -65,7 +65,7 @@ function jdk_url() {
 
 function mvn_url() {
     local VERSION_MAJOR="$(echo "${CS1302_ENV_MVN_VERSION}"| cut -d. -f1)"
-    local ARCHIVE="apache-maven-${VERSION}-bin.tar.gz"
+    local ARCHIVE="apache-maven-${CS1302_ENV_MVN_VERSION}-bin.tar.gz"
     printf 'https://dlcdn.apache.org/maven/maven-%s/%s/binaries/%s\n' \
 	   "${VERSION_MAJOR}" \
 	   "${VERSION}" \
