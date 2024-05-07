@@ -112,7 +112,7 @@ EOF
     echo ""
     echo "Run the following command to enter the environment:"
     echo ""
-    echo "    ${CS1302_ENV_JDK_HOME}/env1302"
+    echo "    ${CS1302_ENV_HOME}/env1302"
     echo ""
 } # env_install
 
