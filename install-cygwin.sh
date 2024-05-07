@@ -21,7 +21,7 @@ case "${CS1302_ENV_OSTYPE}" in
 	;;
     *)
 	echo "Error: Unable to continue. This is the 'cygwin' installer, but" \
-	     "'${CS1302_ENV_OSTYPE}' detected instead." \
+	     "'${CS1302_ENV_OSTYPE}' was detected instead." \
 	     1>&2
 	exit 1
 	;;
