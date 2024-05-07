@@ -68,7 +68,7 @@ function mvn_url() {
     local ARCHIVE="apache-maven-${CS1302_ENV_MVN_VERSION}-bin.tar.gz"
     printf 'https://dlcdn.apache.org/maven/maven-%s/%s/binaries/%s\n' \
 	   "${VERSION_MAJOR}" \
-	   "${VERSION}" \
+	   "${CS1302_ENV_MVN_VERSION}" \
 	   "${ARCHIVE}"
 } # mvn_url
 
