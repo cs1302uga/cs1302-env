@@ -46,3 +46,25 @@ case "${CS1302_ENV_MACHINE}" in
 	exit 1
 	;;
 esac
+
+function jdk_url() {
+    local VERSION="${1:-17.0.10}"
+    local VERSION_MAJOR="$(echo "${VERSION}"| cut -d. -f1)"
+    local ARCHIVE="jdk-${VERSION}_${CS1302_ENV_JDK}_bin.tar.gz"
+    printf 'https://download.oracle.com/java/%s/archive/%s'
+	   "${VERSION_MAJOR}" \
+	   "${ARCHIVE}"
+} # jdk_url
+
+function mvn_url() {
+    local VERSION=""
+    local VERSION_MAJOR="$(echo "${VERSION}"| cut -d. -f1)"
+    local ARCHIVE="apache-maven-${VERSION}-bin.tar.gz"
+    printf 'https://dlcdn.apache.org/maven/maven-%s/%s/binaries/%s' \
+	   "${VERSION_MAJOR}" \
+	   "${VERSION}" \
+	   "${ARCHIVE}"
+} # mvn_url
+
+echo "$(jdk_url)"
+echo "$(mvn_url)"
