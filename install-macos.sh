@@ -47,9 +47,16 @@ case "${CS1302_ENV_MACHINE}" in
 	;;
 esac
 
+declare -r CS1302_ENV_HOME="${HOME}/.cs1302-env"
+
+declare -r CS1302_ENV_JDK_VERSION="${1:-17.0.10}"
+declare -r CS1302_ENV_JDK_HOME="${CS1302_ENV_HOME}/jdk"
+
+declare -r CS1302_ENV_MVN_VERSION="${1:-3.9.6}"
+declare -r CS1302_ENV_MVN_HOME="${CS1302_ENV_HOME}/mvn"
+
 function jdk_url() {
-    local VERSION="${1:-17.0.10}"
-    local VERSION_MAJOR="$(echo "${VERSION}"| cut -d. -f1)"
+    local VERSION_MAJOR="$(echo "${CS1302_ENV_JDK_VERSION}"| cut -d. -f1)"
     local ARCHIVE="jdk-${VERSION}_${CS1302_ENV_JDK}_bin.tar.gz"
     printf 'https://download.oracle.com/java/%s/archive/%s\n' \
 	   "${VERSION_MAJOR}" \
@@ -57,8 +64,7 @@ function jdk_url() {
 } # jdk_url
 
 function mvn_url() {
-    local VERSION="${1:-3.9.6}"
-    local VERSION_MAJOR="$(echo "${VERSION}"| cut -d. -f1)"
+    local VERSION_MAJOR="$(echo "${CS1302_ENV_MVN_VERSION}"| cut -d. -f1)"
     local ARCHIVE="apache-maven-${VERSION}-bin.tar.gz"
     printf 'https://dlcdn.apache.org/maven/maven-%s/%s/binaries/%s\n' \
 	   "${VERSION_MAJOR}" \
@@ -66,5 +72,19 @@ function mvn_url() {
 	   "${ARCHIVE}"
 } # mvn_url
 
-echo "$(jdk_url)"
+function jdk_install() {
+    (
+	set -x
+	mkdir -p "${CS1302_ENV_JDK_HOME}"
+	pushd "${CS1302_ENV_HOME}"
+	curl --progress-bar -o "jdk.tar.gz" "$(jdk_url)"
+	tar -z -x --strip-components 4 --cd "${CS1302_ENV_JDK_HOME}" -f "jdk.tar.gz"
+	popd
+    )
+} # jdk_install
+
+echo "Installing JDK..."
+jdk_install
+
+echo "Installing MVN..."
 echo "$(mvn_url)"
