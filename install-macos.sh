@@ -77,7 +77,6 @@ function jdk_install() {
     mkdir -p "${CS1302_ENV_JDK_HOME}"
     pushd "${CS1302_ENV_HOME}" &> /dev/null
     curl --progress-bar -o "jdk.tar.gz" "$(jdk_url)"
-    tput cup 0 0; tput el; tput cup 0 0; tput el
     tar -z -x --strip-components 4 --cd "${CS1302_ENV_JDK_HOME}" -f "jdk.tar.gz"
     popd &> /dev/null
     echo "Installing JDK to ${CS1302_ENV_JDK_HOME} ... done"
@@ -88,16 +87,35 @@ function mvn_install() {
     mkdir -p "${CS1302_ENV_MVN_HOME}"
     pushd "${CS1302_ENV_HOME}" &> /dev/null
     curl --progress-bar -o "mvn.tar.gz" "$(mvn_url)"
-    tput cup 0 0; tput el; tput cup 0 0; tput el
     tar -z -x --strip-components 1 --cd "${CS1302_ENV_MVN_HOME}" -f "mvn.tar.gz"
     popd &> /dev/null
     echo "Installing MVN to ${CS1302_ENV_MVN_HOME} ... done"
 } # mvn_install
 
+function env_install() {
+    echo "Installing env1302 to ${CS1302_ENV_HOME} ..."
+    mkdir -p "${CS1302_ENV_HOME}"
+    pushd "${CS1302_ENV_HOME}" &> /dev/null
+    cat <<-EOF >"env1302"
+#!/bin/bash -e
+
+export JAVA_HOME="${CS1302_ENV_JDK_HOME}"
+export MAVEN_HOME="${CS1302_ENV_MVN_HOME}"
+export PATH="${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${PATH}"
+export PS1="[env1302] ${PS1:-\\[\\h:\\W \\u \\$ }"
+
+${SHELL} --noprofile
+EOF
+    chmod +x ./env1302
+    popd &> /dev/null
+    echo "Installing env1302 to ${CS1302_ENV_HOME} ... done"
+    echo ""
+    echo "Run the following command to enter the environment:"
+    echo ""
+    echo "    ${CS1302_ENV_JDK_HOME}/env1302"
+    echo ""
+} # env_install
+
 jdk_install
 mvn_install
-
-echo "Run the following command to add the JDK and MVN to your PATH:"
-echo ""
-echo "    export PATH=\"${CS1302_ENV_MVN_HOME}/bin:${CS1302_ENV_JDK_HOME}/bin:\$PATH\""
-echo ""
+env_install
