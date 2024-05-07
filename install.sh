@@ -32,13 +32,23 @@ case "${CS1302_ENV_OSTYPE}" in
 	;;
 esac
 
+fetch() {
+    local URL="${1}"
+    local TIMESTAMP="$(date +%s)"
+    curl -fsSL "${URL}?token=${TIMESTAMP}" \
+	 -X GET \
+	 -H 'Cache-Control: no-cache, no-store, must-revalidate' \
+	 -H 'Pragma: no-cache' \
+	 -H 'Expires: 0'
+} # fetch
+
 fetch_and_run_installer() {
     local OS="${1}"
     local INSTALLER="install-${OS}.sh"
     local URL="https://raw.githubusercontent.com/cs1302uga/cs1302-env/main/${INSTALLER}"
     if curl -fsSL -I ${URL} >/dev/null 2>&1; then
 	COLUMNS="${COLUMNS:-80}" \
-	       bash -c "$(curl -fsSL "${URL}?token=$(date +%s)")"
+	       bash -c "$(fetch ${URL})"
     else
 	echo "Error: Unable to continue. Unable to fetch the installer for" \
 	     "the '${OS}' operating system." \
